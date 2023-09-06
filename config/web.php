@@ -50,6 +50,17 @@ $config = [
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'city' => [
+            'class' => 'app\modules\city\City',
+        ],
+        'review' => [
+            'class' => 'app\modules\review\Review',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\User',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
