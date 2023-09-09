@@ -22,7 +22,9 @@ class m230906_094806_create_table_user extends Migration
                 'email' => $this->string(30)->notNull(),
                 'phone' => $this->string(15)->notNull(),
                 'date_create' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
-                'password' => $this->string(255)
+                'password' => $this->string(255),
+                'auth_key' => $this->string(255),
+                'access_token' => $this->string(255),
             ]
         );
     }
