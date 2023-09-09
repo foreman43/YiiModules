@@ -71,6 +71,7 @@ class DefaultController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                $model->id_author = \Yii::$app->user->id;
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

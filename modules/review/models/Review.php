@@ -49,10 +49,10 @@ class Review extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'id_city' => 'Id City',
-            'title' => 'Title',
-            'text' => 'Text',
-            'rating' => 'Rating',
-            'img' => 'Img',
+            'title' => 'Название отзыва',
+            'text' => 'Текст отзыва',
+            'rating' => 'Рейтинг',
+            'img' => 'Приложение',
             'id_author' => 'Id Author',
             'date_create' => 'Date Create',
         ];
