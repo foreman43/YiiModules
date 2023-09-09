@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\user\models\LoginForm;
+use app\modules\user\models\RegisterForm;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
@@ -53,5 +54,19 @@ class DefaultController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionRegister()
+    {
+        $model = new RegisterForm();
+        if ($model->load(Yii::$app->request->post()) && $model->register()) {
+            return $this->goHome();
+        }
+
+        $model->password = '';
+        $model->passwordRepeat = '';
+        return $this->render('register', [
+            'model' => $model,
+        ]);
     }
 }

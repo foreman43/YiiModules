@@ -16,6 +16,8 @@ use yii\web\IdentityInterface;
  * @property string $phone
  * @property string $date_create
  * @property string|null $password
+ * @property string|null $auth_key
+ * @property string|null $access_token
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -34,11 +36,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['first_name', 'last_name', 'email', 'phone'], 'required'],
-            [['date_create'], 'safe'],
+            [['date_create', 'patronymic'], 'safe'],
             [['first_name', 'last_name', 'patronymic'], 'string', 'max' => 25],
             [['email'], 'string', 'max' => 30],
             [['phone'], 'string', 'max' => 15],
-            [['password'], 'string', 'max' => 255],
+            [['password', 'auth_key', 'access_token'], 'string', 'max' => 255],
         ];
     }
 
@@ -56,6 +58,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'phone' => 'Phone',
             'date_create' => 'Date Create',
             'password' => 'Password',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
         ];
     }
 
@@ -70,7 +74,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    public function avaliableUsername($email)
+    public function avaliableEmail($email)
     {
         return self::findOne(['email' => $email])->cache(3600) === null;
     }
