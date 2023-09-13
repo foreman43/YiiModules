@@ -4,6 +4,7 @@ namespace app\modules\review\controllers;
 
 use app\modules\review\models\Review;
 use app\modules\review\models\ReviewSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,9 +71,16 @@ class DefaultController extends Controller
         $model = new Review();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                $model->id_author = \Yii::$app->user->id;
-                return $this->redirect(['view', 'id' => $model->id]);
+            $post = $this->request->post();
+            $model->rating = (int)$post['Review']['rating'];
+            unset($post['Review']['rating']);
+            if ($model->load($post)) {
+                $model->id_author = Yii::$app->user->id ?? 0;
+                $model->id_city = Yii::$app->session->get('city') ?? 0;
+                var_dump($model->id_author);
+                if($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
