@@ -25,8 +25,7 @@ foreach ($cityList as $item) {
 
     <?= $form->field($model, 'rating')->textInput() ?>
 
-    <?php //todo: rewrite img to img field
-    $form->field($model, 'img')->textInput() ?>
+    <?= $form->field($model, 'img')->fileInput() ?>
 
     <?php echo count($keyValueCityList) > 0
         ? $form->field($model, 'city_id')->checkboxList($keyValueCityList)
