@@ -48,6 +48,10 @@ $config = [
             'rules' => [
             ],
         ],
+        'session' => [
+            'class' => 'yii\web\CacheSession',
+            'timeout' => 2*60*60,
+        ],
     ],
     'params' => $params,
     'modules' => [
