@@ -2,6 +2,7 @@
 
 namespace app\modules\review\models;
 
+use app\modules\user\models\User;
 use Yii;
 
 /**
@@ -15,6 +16,8 @@ use Yii;
  * @property resource|null $img
  * @property int $id_author
  * @property string $date_create
+ *
+ * @property User $author
  */
 class Review extends \yii\db\ActiveRecord
 {
@@ -56,5 +59,15 @@ class Review extends \yii\db\ActiveRecord
             'id_author' => 'Id Author',
             'date_create' => 'Date Create',
         ];
+    }
+
+    public function getEncodedText(): string
+    {
+        return yii\helpers\Html::encode($this->text);
+    }
+
+    public function getAuthor()
+    {
+        return $this->hasOne(User::class, ['id' => 'id_author']);
     }
 }
