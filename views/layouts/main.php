@@ -40,7 +40,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
+            [
+                'label' => 'Reviews',
+                'url' => [
+                    '/review/default/index?ReviewSearch%5Bid%5D=&ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city')
+                ]
+            ],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/user/default/login']]

@@ -15,13 +15,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'id_city') ?>
 
     <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'text') ?>
 
     <?= $form->field($model, 'rating') ?>
 

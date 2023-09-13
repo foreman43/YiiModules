@@ -38,6 +38,7 @@ class DefaultController extends Controller
             return $this->goBack();
         }
 
+        Yii::$app->session->open();
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
@@ -52,6 +53,7 @@ class DefaultController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+        Yii::$app->session->close();
 
         return $this->goHome();
     }
