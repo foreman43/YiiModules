@@ -1,12 +1,29 @@
-<div class="city-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+<?php
+
+use app\modules\city\models\City;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\widgets\ListView;
+
+/** @var yii\web\View $this */
+/** @var app\modules\city\models\CitySearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+
+$this->title = 'Cities';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="city-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => '_item'
+    ]) ?>
+
+
 </div>
