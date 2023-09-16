@@ -31,18 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'id_city',
-            'title',
-            'text',
-            'rating',
-            'img',
-            'id_author',
-            'date_create',
-        ],
-    ]) ?>
+    <p class="text-muted">
+        <small>
+            Created: <?php echo Yii::$app->formatter->asRelativeTime($model->date_create) ?>
+        </small>
+    </p>
+
+
+    <?php echo $model->getEncodedText(); ?>
 
 </div>
