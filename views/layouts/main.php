@@ -31,6 +31,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
+    $currentCity = Yii::$app->session->get('city');
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -39,27 +40,27 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Домашняя', 'url' => ['/site/index']],
             [
-                'label' => 'Reviews',
+                'label' => 'Отзывы',
                 'url' => [
-                    '/review/default/index?ReviewSearch%5Bid%5D=&ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city')
+                    '/review/default/index?ReviewSearch%5Bid%5D=&ReviewSearch%5Bid_city%5D=' . $currentCity
                 ]
             ],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => $currentCity ?? 'Выбрать город', 'url' => ['/city']],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/user/default/login']]
+                ? ['label' => 'Войти', 'url' => ['/user/default/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/user/default/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->first_name . ')',
+                        Yii::$app->user->identity->first_name . '(Выйти)',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
                     . '</li>',
             Yii::$app->user->isGuest
-                ? ['label' => 'Register', 'url' => ['/user/default/register']]
-                : ''
+                ? ['label' => 'Регистрация', 'url' => ['/user/default/register']]
+                : '',
         ]
     ]);
     NavBar::end();
