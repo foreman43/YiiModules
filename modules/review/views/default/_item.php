@@ -7,7 +7,7 @@ use yii\helpers\StringHelper;
 /** @var \app\modules\review\Review $model */
 ?>
 <div>
-    <a href="<?php echo Url::to(['/post/view', 'id'=>$model->id]) ?>"><h3><?php echo Html::encode($model->title); ?></h3></a>
+    <a href="<?php echo Url::to(['/review/default/view', 'id'=>$model->id]) ?>"><h3><?php echo Html::encode($model->title); ?></h3></a>
     <div>
         <?php
         echo StringHelper::truncateWords($model->getEncodedText(),50);
