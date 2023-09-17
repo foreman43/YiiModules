@@ -35,7 +35,15 @@ $authorFullName = "{$model->author->last_name} {$model->author->first_name} {$mo
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Отзывы этого автора</button>
+                    <?php
+                    echo Html::a(
+                        'К отзывам этого автора',
+                        ['/review/default/index?ReviewSearch%5Bid_author%5D=' . $model->author->id],
+                        [
+                            'class' => 'btn btn-primary'
+                        ]
+                    )
+                    ?>
                 </div>
             </div>
         </div>
