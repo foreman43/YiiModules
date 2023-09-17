@@ -89,7 +89,7 @@ class SiteController extends Controller
     public function actionChoose()
     {
         //todo: нужен результат работы функции определения города
-        Yii::$app->session->set('city', 'Город');
-        $this->redirect('/review/default/index?ReviewSearch%5Bid%5D=&ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city'));
+        Yii::$app->session->set('city', 1);
+        $this->redirect('/review/default/index?ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city'));
     }
 }
