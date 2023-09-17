@@ -31,7 +31,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <header id="header">
     <?php
-    $currentCity = Yii::$app->session->get('city');
+    $currentCityId = Yii::$app->session->get('city');
+    $currentCity = \app\modules\city\models\City::findOne($currentCityId)->name ?? 'Город';
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -44,7 +45,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             [
                 'label' => 'Отзывы',
                 'url' => [
-                    '/review/default/index?ReviewSearch%5Bid%5D=&ReviewSearch%5Bid_city%5D=' . $currentCity
+                    '/review/default/index?ReviewSearch%5Bid_city%5D=' . $currentCityId
                 ]
             ],
             ['label' => $currentCity ?? 'Выбрать город', 'url' => ['/city']],

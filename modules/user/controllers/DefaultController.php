@@ -52,8 +52,8 @@ class DefaultController extends Controller
      */
     public function actionLogout()
     {
+        Yii::$app->session->destroy();
         Yii::$app->user->logout();
-        Yii::$app->session->close();
 
         return $this->goHome();
     }
