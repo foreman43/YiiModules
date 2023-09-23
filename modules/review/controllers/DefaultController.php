@@ -2,6 +2,7 @@
 
 namespace app\modules\review\controllers;
 
+use app\modules\city\models\City;
 use app\modules\review\models\Review;
 use app\modules\review\models\ReviewSearch;
 use Yii;
@@ -72,14 +73,23 @@ class DefaultController extends Controller
 
         if ($this->request->isPost) {
             $post = $this->request->post();
-            $model->rating = (int)$post['Review']['rating'];
-            unset($post['Review']['rating']);
             if ($model->load($post)) {
                 $model->id_author = Yii::$app->user->id ?? 0;
-                $model->id_city = Yii::$app->session->get('city') ?? 0;
-                var_dump($model->id_author);
-                if($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                foreach ($post['Review']['id_city'] as $city) {
+                    var_dump($city);
+                    if(Review::findOne($city)) {
+                        $model->id_city = $city;
+                        $model->save();
+                    }
+                    else {
+                        //todo: replace by APY loading
+                        $newCity = new City();
+                        $newCity->name = $city;
+                        $newCity->save();
+
+                        $model->id_city = City::findOne(['name' => $city])->id;
+                        $model->save();
+                    }
                 }
             }
         } else {

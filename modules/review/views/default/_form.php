@@ -8,13 +8,7 @@ use \app\modules\city\models\City;
 /** @var yii\web\View $this */
 /** @var app\modules\review\models\Review $model */
 /** @var yii\widgets\ActiveForm $form */
-
-$cityList = City::find()->all();
-$keyValueCityList = [];
-foreach ($cityList as $item) {
-    $keyValueCityList[$item->id] = $item->name;
-}
-//yii\helpers\Html::activeListBox()
+$model->id_city = Yii::$app->session->get('city') ?? 1;
 ?>
 
 <div class="review-form">
@@ -33,9 +27,13 @@ foreach ($cityList as $item) {
         'data' => \yii\helpers\ArrayHelper::map(City::find()->all(),'id', 'name'),
         'language' => 'ru',
         'options' => [
-            'placeholder' => 'Выберите город...',
+            'placeholder' => 'Выберите город или оставьте пустым чтобы применить ко всем городам',
             'multiple' => true
-        ]
+        ],
+        'pluginOptions' => [
+            'tags' => true,
+            'maximumInputLength' => 10
+        ],
     ]) ?>
 
     <div class="form-group">
