@@ -1,5 +1,6 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use \app\modules\city\models\City;
@@ -13,6 +14,7 @@ $keyValueCityList = [];
 foreach ($cityList as $item) {
     $keyValueCityList[$item->id] = $item->name;
 }
+//yii\helpers\Html::activeListBox()
 ?>
 
 <div class="review-form">
@@ -27,9 +29,14 @@ foreach ($cityList as $item) {
 
     <?= $form->field($model, 'img')->fileInput() ?>
 
-    <?php echo count($keyValueCityList) > 0
-        ? $form->field($model, 'city_id')->checkboxList($keyValueCityList)
-        : ''?>
+    <?= $form->field($model, 'id_city')->widget(Select2::class, [
+        'data' => \yii\helpers\ArrayHelper::map(City::find()->all(),'id', 'name'),
+        'language' => 'ru',
+        'options' => [
+            'placeholder' => 'Выберите город...',
+            'multiple' => true
+        ]
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

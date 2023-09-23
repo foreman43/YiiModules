@@ -51,7 +51,7 @@ class Review extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_city' => 'Id City',
+            'id_city' => 'Город',
             'title' => 'Название отзыва',
             'text' => 'Текст отзыва',
             'rating' => 'Рейтинг',
