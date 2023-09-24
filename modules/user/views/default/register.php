@@ -8,6 +8,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 use \app\modules\user\models\RegisterForm;
+use yii\captcha\Captcha;
 
 $this->title = 'Register';
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'first_name')->textInput() ?>
+            <?= $form->field($model, 'first_name')->textInput(['autofocus' => true]) ?>
 
             <?= $form->field($model, 'last_name')->textInput() ?>
 
@@ -44,6 +45,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'password')->passwordInput() ?>
 
             <?= $form->field($model, 'passwordRepeat')->passwordInput() ?>
+
+            <?php /*$form->field($model, 'verifyCode')->widget(Captcha::class, [
+                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+            ]) */?>
 
             <div class="form-group">
                 <div>

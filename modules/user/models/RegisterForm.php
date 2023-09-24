@@ -15,6 +15,7 @@ class RegisterForm extends Model
     public string $phone = '';
     public string $password = '';
     public string $passwordRepeat = '';
+    public $verifyCode;
 
 
     /**
@@ -31,7 +32,15 @@ class RegisterForm extends Model
             ['phone', 'string', 'max' => 15],
             ['password', 'string', 'min' => 5, 'max' => 40],
             ['email', 'validateEmail'],
-            ['passwordRepeat', 'compare', 'compareAttribute' => 'password']
+            ['passwordRepeat', 'compare', 'compareAttribute' => 'password'],
+            ['verifyCode', 'captcha']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'verifyCode' => 'Verification Code',
         ];
     }
 
@@ -67,6 +76,16 @@ class RegisterForm extends Model
             if (!$user || !$user->avaliableEmail($this->email)) {
                 $this->addError($attribute, 'This user is already exist.');
             }
+
+            /*Yii::$app->mailer->compose()
+                ->setTo($this->email)
+                ->setBcc('roobi902@gmail.com')
+                ->setSubject('Подтверждение Email')
+                ->setTextBody('Тестовый текст')
+                ->send();*/
+            //todo: finish validation
+            //todo: fix error 535
+
         }
     }
 
