@@ -13,7 +13,11 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
 
 <div class="review-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'enctype' => 'multipart/form-data'
+        ]
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -22,6 +26,8 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
     <?= $form->field($model, 'rating')->textInput() ?>
 
     <?= $form->field($model, 'img')->fileInput() ?>
+
+    <img src="" alt="" id="image-showcase" width="100" height="100">
 
     <?= $form->field($model, 'id_city')->widget(Select2::class, [
         'data' => \yii\helpers\ArrayHelper::map(City::find()->all(),'id', 'name'),
@@ -41,5 +47,20 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
     </div>
 
     <?php ActiveForm::end(); ?>
+    <script>
+        const fileInput = document.getElementById('review-img');
+
+        fileInput.addEventListener('change', e => {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+                document.getElementsByName('Review[img]')[0].value = reader.result;
+               document.getElementById('image-showcase').src = reader.result;
+            });
+
+            reader.readAsDataURL(file);
+        })
+    </script>
 
 </div>

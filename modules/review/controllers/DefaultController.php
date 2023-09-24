@@ -9,6 +9,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * DefaultController implements the CRUD actions for Review model.
@@ -71,12 +72,13 @@ class DefaultController extends Controller
     {
         $model = new Review();
 
+        //UploadedFile::getInstance()
         if ($this->request->isPost) {
             $post = $this->request->post();
+
             if ($model->load($post)) {
                 $model->id_author = Yii::$app->user->id ?? 0;
                 foreach ($post['Review']['id_city'] as $city) {
-                    var_dump($city);
                     if(Review::findOne($city)) {
                         $model->id_city = $city;
                         $model->save();
@@ -91,6 +93,7 @@ class DefaultController extends Controller
                         $model->save();
                     }
                 }
+                //return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -133,6 +136,11 @@ class DefaultController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionUpload()
+    {
+        
     }
 
     /**

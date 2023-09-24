@@ -38,6 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
 
-    <?php echo $model->getEncodedText(); ?>
+    <?php
+    echo "<p>{$model->getEncodedText()}</p>";
+    echo Html::img($model->img);
+    ?>
 
 </div>
