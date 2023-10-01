@@ -79,7 +79,7 @@ class DefaultController extends Controller
             if ($model->load($post)) {
                 $model->id_author = Yii::$app->user->id ?? 0;
                 foreach ($post['Review']['id_city'] as $city) {
-                    if(Review::findOne($city)) {
+                    if(City::findOne($city)) {
                         $model->id_city = $city;
                         $model->save();
                     }
