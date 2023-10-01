@@ -25,10 +25,6 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
 
     <?= $form->field($model, 'rating')->textInput() ?>
 
-    <?= $form->field($model, 'img')->fileInput() ?>
-
-    <img src="" alt="" id="image-showcase" width="100" height="100">
-
     <?= $form->field($model, 'id_city')->widget(Select2::class, [
         'data' => \yii\helpers\ArrayHelper::map(City::find()->all(),'id', 'name'),
         'language' => 'ru',
@@ -41,6 +37,10 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
             'maximumInputLength' => 10
         ],
     ]) ?>
+
+    <?= $form->field($model, 'img')->fileInput() ?>
+
+    <img src="" alt="" id="image-showcase" width="100" height="100" style="display: none">
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -56,7 +56,9 @@ $model->id_city = Yii::$app->session->get('city') ?? 1;
 
             reader.addEventListener('load', () => {
                 document.getElementsByName('Review[img]')[0].value = reader.result;
-               document.getElementById('image-showcase').src = reader.result;
+                const showcase = document.getElementById('image-showcase');
+                showcase.src = reader.result;
+                showcase.style.display = 'block';
             });
 
             reader.readAsDataURL(file);
