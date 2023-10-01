@@ -12,9 +12,11 @@ $authorFullName = "{$model->author->last_name} {$model->author->first_name} {$mo
     <div>
         <?php
         echo StringHelper::truncateWords($model->getEncodedText(),50);
-        echo "<p>
+        echo Yii::$app->user->isGuest
+        ? "<p>{$model->author->last_name} {$model->author->first_name}</p>"
+        : "<p>
             <a class=\"link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\">
-                {$model->author->last_name} {$model->author->first_name[0]}. 
+                {$model->author->last_name} {$model->author->first_name} 
             </a>
         </p>";
         ?>
