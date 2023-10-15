@@ -136,6 +136,9 @@ class DefaultController extends Controller
     public function actionChoose()
     {
         Yii::$app->session->set('city', Yii::$app->request->post('city'));
-        $this->redirect('/review/default/index?ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city'));
+        $this->redirect(\yii\helpers\Url::to(
+            ['/review/default/index',
+                'ReviewSearch[id_city]' => Yii::$app->session->get('city')]
+        ));
     }
 }
