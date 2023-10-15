@@ -45,8 +45,10 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             [
                 'label' => 'Отзывы',
                 'url' => [
-                    '/review/default/index?ReviewSearch%5Bid_city%5D=' . $currentCityId
-                ]
+                    \yii\helpers\Url::to(
+                        ['/review/default/index',
+                            'ReviewSearch[id_city]' => $currentCityId]
+                    )]
             ],
             ['label' => $currentCity ?? 'Выбрать город', 'url' => ['/city']],
             Yii::$app->user->isGuest

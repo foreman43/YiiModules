@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use http\Url;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -90,6 +91,9 @@ class SiteController extends Controller
     {
         //todo: нужен результат работы функции определения города
         \app\modules\city\models\City::setSessionCity($city);
-        $this->redirect('/review/default/index?ReviewSearch%5Bid_city%5D=' . Yii::$app->session->get('city'));
+        $this->redirect(\yii\helpers\Url::to(
+            ['/review/default/index',
+            'ReviewSearch[id_city]' => Yii::$app->session->get('city')]
+        ));
     }
 }

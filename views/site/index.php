@@ -9,7 +9,6 @@ $this->title = 'City Reviews';
 
 $client = new IPinfo('6195168d468f5c');
 $details = $client->getDetails();
-//todo: нужен разультат работы функции определения города
 ?>
 <div class="site-index">
 
@@ -18,7 +17,7 @@ $details = $client->getDetails();
         <p class="lead"><?php echo $details->city ?? '*имя города*'?> - это ваш город?</p>
 
         <p>
-            <?php echo Html::a('Да', ['choose', 'city' => $details->city], ['class' => 'btn btn-success']) ?>
+            <?php echo Html::a('Да', ['choose', 'city' => $details->city ?? '*имя города*'], ['class' => 'btn btn-success']) ?>
             <?php echo Html::a('Нет, выбрать из списка', ['/city'], ['class' => 'btn btn-primary']) ?>
         </p>
     </div>
