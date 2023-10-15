@@ -1,6 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
+
 /** @var string $content */
 
 use app\assets\AppAsset;
@@ -54,13 +55,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             Yii::$app->user->isGuest
                 ? ['label' => 'Войти', 'url' => ['/user/default/login']]
                 : '<li class="nav-item">'
-                    . Html::beginForm(['/user/default/logout'])
-                    . Html::submitButton(
-                        Yii::$app->user->identity->first_name . '(Выйти)',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>',
+                . Html::beginForm(['/user/default/logout'])
+                . Html::submitButton(
+                    Yii::$app->user->identity->first_name . '(Выйти)',
+                    ['class' => 'nav-link btn btn-link logout']
+                )
+                . Html::endForm()
+                . '</li>',
             Yii::$app->user->isGuest
                 ? ['label' => 'Регистрация', 'url' => ['/user/default/register']]
                 : '',

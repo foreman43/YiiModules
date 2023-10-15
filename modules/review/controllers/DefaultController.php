@@ -79,11 +79,10 @@ class DefaultController extends Controller
             if ($model->load($post)) {
                 $model->id_author = Yii::$app->user->id ?? 0;
                 foreach ($post['Review']['id_city'] as $city) {
-                    if(City::findOne($city)) {
+                    if (City::findOne($city)) {
                         $model->id_city = $city;
                         $model->save();
-                    }
-                    else {
+                    } else {
                         //todo: replace by APY loading
                         $newCity = new City();
                         $newCity->name = $city;
@@ -140,7 +139,7 @@ class DefaultController extends Controller
 
     public function actionUpload()
     {
-        
+
     }
 
     /**

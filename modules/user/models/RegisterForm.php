@@ -24,7 +24,7 @@ class RegisterForm extends Model
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email', 'phone', 'password','passwordRepeat'], 'required'],
+            [['first_name', 'last_name', 'email', 'phone', 'password', 'passwordRepeat'], 'required'],
             ['patronymic', 'safe'],
             [['first_name', 'last_name'], 'string', 'min' => 3, 'max' => 25],
             [['patronymic'], 'string', 'max' => 25],
@@ -56,14 +56,11 @@ class RegisterForm extends Model
         $user->auth_key = Yii::$app->security->generateRandomString();
         $user->access_token = Yii::$app->security->generateRandomString();
 
-        if($user->save())
-        {
+        if ($user->save()) {
             Yii::$app->user->login($user, 0);
             return true;
-        }
-        else
-        {
-            Yii::error('User not saved in DB.'.VarDumper::dump($user->errors));
+        } else {
+            Yii::error('User not saved in DB.' . VarDumper::dump($user->errors));
             return false;
         }
     }

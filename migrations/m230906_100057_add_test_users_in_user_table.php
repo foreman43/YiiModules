@@ -46,7 +46,7 @@ class m230906_100057_add_test_users_in_user_table extends Migration
     {
         $this->delete('user',
             [
-            'email' => 'admin@gmail.com'
+                'email' => 'admin@gmail.com'
             ]
         );
 

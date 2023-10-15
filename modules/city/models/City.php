@@ -47,10 +47,9 @@ class City extends \yii\db\ActiveRecord
 
     public static function setSessionCity(string $cityName)
     {
-        if($city = self::findOne(['name' => $cityName])) {
+        if ($city = self::findOne(['name' => $cityName])) {
             Yii::$app->session->set('city', $city->id);
-        }
-        else {
+        } else {
             $newCity = new City();
             $newCity->name = $cityName;
             $newCity->save();

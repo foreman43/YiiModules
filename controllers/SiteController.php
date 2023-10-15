@@ -93,7 +93,7 @@ class SiteController extends Controller
         \app\modules\city\models\City::setSessionCity($city);
         $this->redirect(\yii\helpers\Url::to(
             ['/review/default/index',
-            'ReviewSearch[id_city]' => Yii::$app->session->get('city')]
+                'ReviewSearch[id_city]' => Yii::$app->session->get('city')]
         ));
     }
 }

@@ -86,7 +86,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return self::find()->where(['access_token'=>$token])->one();
+        return self::find()->where(['access_token' => $token])->one();
     }
 
     /**
@@ -97,7 +97,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function findByEmail(string $email)
     {
-        return self::findOne(['email'=>$email]);
+        return self::findOne(['email' => $email]);
     }
 
     public function getId(): int
