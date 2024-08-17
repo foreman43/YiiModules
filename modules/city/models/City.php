@@ -14,7 +14,7 @@ use Yii;
 class City extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * {@inheritdoc}ggggggggggggggggg
      */
     public static function tableName()
     {
